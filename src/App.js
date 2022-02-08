@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useCallback, useState } from "react";
+import TodoList from "./Components/TodoList";
 
 function App() {
+  const [todoList, setTodoList] = useState([]);
+  const [input, setInput] = useState("");
+  const [i, setCounter] = useState(0);
+
+  const onInputChange = useCallback((e) => {
+    setInput(e.target.value);
+    //console.log(input);
+  }, []);
+
+  const onButtonClick = useCallback((e) =>{
+    setCounter(i + 1);
+    setTodoList([...todoList, {id: i + '', name: input, isDone: false}]);
+    setInput("");
+  }, [input, todoList, i]);
+
+  const onItemClick = useCallback((id) => {
+    setTodoList(oldList => oldList.filter(item => item.id !== id))
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="input-form">
+        <form>
+          <input className="text-field" 
+            type={"text"} 
+            name="todo-name" 
+            onChange={onInputChange} 
+            value={input} 
+            placeholder="Add..."/>
+          <button className="btn-done" disabled={!input} onClick={onButtonClick}>Done!</button>
+        </form>
+      </div>
+      <TodoList list={todoList} onItemClick={onItemClick}/>
     </div>
   );
 }
