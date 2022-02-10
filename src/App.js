@@ -31,7 +31,7 @@ function App() {
             onChange={onInputChange} 
             value={input} 
             placeholder="Add..."/>
-          <button className="btn-done" disabled={!input} onClick={onButtonClick}>Done!</button>
+          <button className="btn-done" disabled={!input} type="submit" onClick={onButtonClick}>Done!</button>
         </form>
       </div>
       <TodoList list={todoList} onItemClick={onItemClick}/>

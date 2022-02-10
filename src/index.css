@@ -39,8 +39,23 @@ code {
   flex-wrap: nowrap;
 }
 
+form {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
 .btn-done {
-  margin-right: 60px;
+  border-radius: 5px;
+  border: 2pt;
+  padding: 3px 6px;
+  position: absolute;
+  right: 30px;
+  background-color: var(--btn-color);
+}
+
+.btn-done:enabled {
+  --btn-color: #1b904e;
 }
 
 .text-field {
